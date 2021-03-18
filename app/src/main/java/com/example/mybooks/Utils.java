@@ -3,39 +3,67 @@ package com.example.mybooks;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Utils {
 
-    public Utils () {}
+    private static final String log_tag = Utils.class.getSimpleName();
 
-    private String log_tag = Utils.class.getSimpleName();
+    public Utils () {}
 
     /**
      * Return string later
      * Make private later
      * @param url
+     * @retun String
      */
-    public void makeHttpRequest (URL url)
+    public String makeHttpRequest (URL url)
     {
-        HttpURLConnection connection;
-        connection = null;
+        HttpURLConnection connection = null;
+        BufferedReader bufferedReader = null;
         int responseCode;
+        String returnedJSONString = null;
 
         try {
+            // Open the network connection
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
+
+            // Used for debugging
             responseCode = connection.getResponseCode();
+
+            // Used for debugging
             Log.i(log_tag, "Making http request");
 
             if (responseCode == 200) {
-                InputStream inputStream = connection.getInputStream();
+                // Used for debugging
                 Log.i(log_tag, "Http request successful with code " + responseCode);
+
+                InputStream inputStream = connection.getInputStream();
+                StringBuilder stringBuilder = new StringBuilder();
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+                String line;
+
+                while ((line = bufferedReader.readLine()) != null) {
+                    // Read lines from the bufferedReader
+                    stringBuilder.append(line + "\n");
+                }
+
+                // If stream was empty
+                if (stringBuilder.length() == 0) {
+                    return null;
+                }
+
+                returnedJSONString = stringBuilder.toString();
+
             } else {
                 Log.e(log_tag, "Http request failed with code " + responseCode);
             }
@@ -43,8 +71,19 @@ public class Utils {
             Log.e(log_tag, "Http connection error", ex);
             ex.printStackTrace();
         } finally {
-            connection.disconnect();
+            if (connection != null) {
+                connection.disconnect();
+            }
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
+
+        return returnedJSONString;
 
     }
 
