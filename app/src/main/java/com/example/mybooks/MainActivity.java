@@ -2,6 +2,7 @@ package com.example.mybooks;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,12 @@ public class MainActivity extends AppCompatActivity {
                 // For debugging purposes
                 Log.i(getResources().getString(R.string.app_name), "userQuery " + userQuery);
 
+                // Execute the query
                 new SearchTask().execute(userQuery);
+
+                // Start new activity to show results
+                Intent searchBookActivity = new Intent(MainActivity.this, SearchBookActivity.class);
+                startActivity(searchBookActivity);
             }
         });
 
