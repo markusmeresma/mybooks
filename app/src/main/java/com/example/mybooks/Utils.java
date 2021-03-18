@@ -1,6 +1,8 @@
 package com.example.mybooks;
 
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.service.autofill.AutofillService;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -9,6 +11,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 public class Utils {
@@ -20,17 +24,21 @@ public class Utils {
     /**
      * Return string later
      * Make private later
-     * @param url
+     * @param
      * @retun String
      */
-    public String makeHttpRequest (URL url)
+    public String makeHttpRequest (String userQuery)
     {
         HttpURLConnection connection = null;
         BufferedReader bufferedReader = null;
         int responseCode;
-        String returnedJSONString = null;
+        String JSONString = null;
+        URL url = null;
 
         try {
+            // Create URL
+            url = createURL(userQuery);
+
             // Open the network connection
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestMethod("GET");
@@ -62,7 +70,7 @@ public class Utils {
                     return null;
                 }
 
-                returnedJSONString = stringBuilder.toString();
+                JSONString = stringBuilder.toString();
 
             } else {
                 Log.e(log_tag, "Http request failed with code " + responseCode);
@@ -83,24 +91,35 @@ public class Utils {
             }
         }
 
-        return returnedJSONString;
+        return JSONString;
 
     }
 
     /**
      * Make private later
-     * @param urlString
+     * @param userQuery
      * @return
      */
-    public URL URLCreator (String urlString)
+    public URL createURL (String userQuery)
     {
+        final String GOOGLE_BOOKS_API = "https://www.googleapis.com/books/v1/volumes?";
+        final String QUERY_PARAM = "q";
+
         try {
-            URL url = new URL(urlString);
-            Log.i(log_tag, "Url" + url);
+            // Build up the query URI
+            Uri builtURI = Uri.parse(GOOGLE_BOOKS_API).buildUpon()
+                    .appendQueryParameter(QUERY_PARAM, userQuery)
+                    .build();
+
+            // Create URL
+            URL url = new URL(builtURI.toString());
+
             return url;
+
         } catch (MalformedURLException ex) {
             ex.printStackTrace();
         }
+
         return null;
     }
 }

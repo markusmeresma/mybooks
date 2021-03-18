@@ -8,6 +8,7 @@ public class SearchTask extends AsyncTask<String, Void, String> {
     private Utils utils = new Utils();
     private static final String log_tag = SearchTask.class.getSimpleName();
 
+    /*
     public String createURLString (String requestParameters)
     {
         String stringURL;
@@ -15,7 +16,7 @@ public class SearchTask extends AsyncTask<String, Void, String> {
         // Something is broken here - try using uri in utils class to build up the url instead of this approach
         // Build URL string with search parameters given by the user
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(R.string.GOOGLE_BOOKS_API + requestParameters);
+        stringBuilder.append(GOOGLE_BOOKS_API + requestParameters);
 
         stringURL = stringBuilder.toString();
 
@@ -23,6 +24,7 @@ public class SearchTask extends AsyncTask<String, Void, String> {
 
         return stringURL;
     }
+    */
 
     @Override
     protected String doInBackground(String... urls) {
@@ -31,7 +33,7 @@ public class SearchTask extends AsyncTask<String, Void, String> {
 
         String requestedData;
 
-        requestedData = utils.makeHttpRequest(utils.URLCreator(urls[0]));
+        requestedData = utils.makeHttpRequest(urls[0]);
         Log.i(log_tag, "Returned data: " + requestedData);
 
         return null;
