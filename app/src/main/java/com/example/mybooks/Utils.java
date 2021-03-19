@@ -104,6 +104,7 @@ public class Utils {
     {
         final String GOOGLE_BOOKS_API = "https://www.googleapis.com/books/v1/volumes?";
         final String QUERY_PARAM = "q";
+        // final String MAX_RESULTS = "maxResults"; - for debugging
 
         try {
             // Build up the query URI

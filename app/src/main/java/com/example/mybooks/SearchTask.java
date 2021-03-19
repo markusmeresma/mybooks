@@ -49,10 +49,9 @@ public class SearchTask extends AsyncTask<String, Void, String> {
 
                 // Try to create a new book
                 try {
+                    // Enters infinite loop for some reason and keep printing the same title
                     // Create new Book
                     Book book = new Book();
-                    // Set book ID
-                    book.setId(volumeInfo.getString("id"));
                     // Set book title
                     book.setTitle(volumeInfo.getString("title"));
                     Log.i(log_tag, "ID: " + book.getId() + "; Title: " + book.getTitle() + "\n");
