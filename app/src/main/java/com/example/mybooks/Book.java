@@ -6,13 +6,6 @@ public class Book {
     private String subtitle;
     private String description;
 
-    public Book(String i, String t, String s, String d) {
-        setId(i);
-        setTitle(t);
-        setSubtitle(s);
-        setDescription(d);
-    }
-
     public String getId() {
         return this.id;
     }
