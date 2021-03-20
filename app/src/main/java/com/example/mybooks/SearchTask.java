@@ -6,6 +6,8 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 public class SearchTask extends AsyncTask<String, Void, String> {
 
     private Utils utils = new Utils();
@@ -38,34 +40,35 @@ public class SearchTask extends AsyncTask<String, Void, String> {
         try {
             // Convert the raw response string to JSON object
             JSONObject jsonObject = new JSONObject(JSONString);
-            JSONArray jsonArray = jsonObject.getJSONArray("items");
+            // Get the JSON array of books
+            JSONArray jsonArray = (JSONArray) jsonObject.get("items");
 
-            // Set iterator
-            int i = 0;
+            Log.i(log_tag, "JSONArray " + jsonArray);
 
-            while (i < jsonArray.length()) {
-                JSONObject bookJSON = jsonArray.getJSONObject(i);
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject bookJSON = (JSONObject) jsonArray.get(i);
                 JSONObject volumeInfo = bookJSON.getJSONObject("volumeInfo");
 
-                // Try to create a new book
+                Log.i(log_tag, "bookJSON: " + bookJSON);
+                Log.i(log_tag, "volumeInfo: " + volumeInfo);
+
                 try {
-                    // Enters infinite loop for some reason and keep printing the same title
-                    // Create new Book
+                    // Create a new book
                     Book book = new Book();
                     // Set book title
                     book.setTitle(volumeInfo.getString("title"));
-                    Log.i(log_tag, "ID: " + book.getId() + "; Title: " + book.getTitle() + "\n");
+                    // For debugging
+                    Log.i(log_tag, "Title: " + book.getTitle());
 
-                    // Save book to array of books
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
