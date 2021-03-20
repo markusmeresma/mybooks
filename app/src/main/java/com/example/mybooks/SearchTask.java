@@ -6,12 +6,15 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class SearchTask extends AsyncTask<String, Void, String> {
 
     private Utils utils = new Utils();
     private static final String log_tag = SearchTask.class.getSimpleName();
+    public ArrayList<Book> fetched_books = new ArrayList<Book>();
 
     /**
      *
@@ -25,7 +28,7 @@ public class SearchTask extends AsyncTask<String, Void, String> {
 
         JSONString = utils.makeHttpRequest(urls[0]);
         // Used for debugging purposes
-        Log.i(log_tag, "JSON response: " + JSONString);
+        // Log.i(log_tag, "JSON response: " + JSONString);
 
         return JSONString;
     }
@@ -55,6 +58,8 @@ public class SearchTask extends AsyncTask<String, Void, String> {
                     Book book = new Book();
                     // Set book title
                     book.setTitle(volumeInfo.getString("title"));
+                    // Add fetched book to list
+                    fetched_books.add(book);
                     // For debugging
                     Log.i(log_tag, "Title: " + book.getTitle());
 

@@ -29,11 +29,9 @@ public class MainActivity extends AppCompatActivity {
                 // For debugging purposes
                 Log.i(getResources().getString(R.string.app_name), "userQuery " + userQuery);
 
-                // Execute the query
-                new SearchTask().execute(userQuery);
-
-                // Start new activity to show results
+                // Start a new activity to fetch books
                 Intent searchBookActivity = new Intent(MainActivity.this, SearchBookActivity.class);
+                searchBookActivity.putExtra("USER_QUERY", userQuery);
                 startActivity(searchBookActivity);
             }
         });
