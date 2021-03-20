@@ -14,7 +14,7 @@ public class SearchTask extends AsyncTask<String, Void, String> {
 
     private Utils utils = new Utils();
     private static final String log_tag = SearchTask.class.getSimpleName();
-    public ArrayList<Book> fetched_books = new ArrayList<Book>();
+    public ArrayList<Book> fetched_books = new ArrayList<>();
 
     /**
      *
@@ -71,6 +71,9 @@ public class SearchTask extends AsyncTask<String, Void, String> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // For debugging
+        Log.i(log_tag, "Fetched books array size: " + fetched_books.size());
 
     }
 }

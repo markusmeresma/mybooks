@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -12,7 +13,8 @@ import java.util.ArrayList;
 public class SearchBookActivity extends AppCompatActivity {
 
     private RecyclerView fetchedBooksListView;
-    String user_query = null;
+    private String user_query = null;
+    public ArrayList<Book> requested_books = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +33,22 @@ public class SearchBookActivity extends AppCompatActivity {
         user_query = extras.getString("USER_QUERY");
 
         // Get the recyclerview through its id
-        fetchedBooksListView = (RecyclerView) findViewById(R.id.fetched_books_list);
+        // fetchedBooksListView = (RecyclerView) findViewById(R.id.fetched_books_list);
 
         // Fetch books with user query
         searchTask.execute(user_query);
 
+        // Debugging
+        Log.i(getResources().getString(R.string.app_name), "Test requested books size " + requested_books.size() + "\n");
+
         // Initialize books adapter
-        BooksAdapter adapter = new BooksAdapter(this, R.layout.individual_book_entry, searchTask.fetched_books);
+        // BooksAdapter adapter = new BooksAdapter(this, R.layout.individual_book_entry, searchTask.fetched_books);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        // RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
-        fetchedBooksListView.setLayoutManager(layoutManager);
+        // fetchedBooksListView.setLayoutManager(layoutManager);
 
-        fetchedBooksListView.setAdapter(adapter);
+        // fetchedBooksListView.setAdapter(adapter);
     }
 
 

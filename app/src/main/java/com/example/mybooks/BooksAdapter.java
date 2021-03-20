@@ -1,6 +1,7 @@
 package com.example.mybooks;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +14,15 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksHolder> {
     private final ArrayList<Book> books;
     private Context context;
     private int itemResource;
+    private static final String log_tag = BooksAdapter.class.getSimpleName();
 
     public BooksAdapter (Context context, int itemResource, ArrayList<Book> books)
     {
         this.books = books;
         this.context = context;
         this.itemResource = itemResource;
+        // Debugging
+        // Log.i(log_tag, "Inside BooksAdapter constructor, books: \n");
     }
 
     /**

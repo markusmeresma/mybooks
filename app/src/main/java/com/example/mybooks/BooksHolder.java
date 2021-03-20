@@ -12,8 +12,8 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class BooksHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    private final TextView bookTitle;
 
+    private final TextView bookTitle;
     private Book book;
     private Context context;
 
@@ -33,7 +33,7 @@ public class BooksHolder extends RecyclerView.ViewHolder implements View.OnClick
      */
     public void bindBook (Book book)
     {
-        // Bind the data to the ViwHolder
+        // Bind the data to the ViewHolder
         this.book = book;
         this.bookTitle.setText(book.getTitle());
     }
