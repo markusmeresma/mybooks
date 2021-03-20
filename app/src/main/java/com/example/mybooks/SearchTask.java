@@ -50,9 +50,6 @@ public class SearchTask extends AsyncTask<String, Void, String> {
                 JSONObject bookJSON = (JSONObject) jsonArray.get(i);
                 JSONObject volumeInfo = bookJSON.getJSONObject("volumeInfo");
 
-                Log.i(log_tag, "bookJSON: " + bookJSON);
-                Log.i(log_tag, "volumeInfo: " + volumeInfo);
-
                 try {
                     // Create a new book
                     Book book = new Book();
