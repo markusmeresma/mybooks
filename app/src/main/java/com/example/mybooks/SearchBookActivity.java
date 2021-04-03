@@ -8,48 +8,52 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class SearchBookActivity extends AppCompatActivity {
 
     private RecyclerView fetchedBooksListView;
     private String user_query = null;
-    public ArrayList<Book> requested_books = new ArrayList<>();
+    public ArrayList<Book> fetched_books = new ArrayList<>();
+    private  static final String log_tag = SearchBookActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_book);
 
+        // Get the recyclerview through its id
+        fetchedBooksListView = (RecyclerView) findViewById(R.id.booksListView);
+
+        fetchedBooksListView.setHasFixedSize(true);
+
         Bundle extras = getIntent().getExtras();
         SearchTask searchTask = new SearchTask();
-
-        // If array of fetched books is not empty then clear it
-        if (searchTask.fetched_books.size() > 0) {
-            searchTask.fetched_books.clear();
-        }
 
         // Get the user query
         user_query = extras.getString("USER_QUERY");
 
-        // Get the recyclerview through its id
-        // fetchedBooksListView = (RecyclerView) findViewById(R.id.fetched_books_list);
+        try {
+            // Fetch books
+            fetched_books = searchTask.execute(user_query).get();
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+        }
 
-        // Fetch books with user query
-        searchTask.execute(user_query);
-
-        // Debugging
-        Log.i(getResources().getString(R.string.app_name), "Test requested books size " + requested_books.size() + "\n");
+        // For debugging
+        Log.i(log_tag, "Inside Search Book Activity fetched books list size: " + fetched_books.size());
 
         // Initialize books adapter
-        // BooksAdapter adapter = new BooksAdapter(this, R.layout.individual_book_entry, searchTask.fetched_books);
+        BooksAdapter adapter = new BooksAdapter(this, R.layout.book_entry, fetched_books);
 
-        // RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
-        // fetchedBooksListView.setLayoutManager(layoutManager);
+        fetchedBooksListView.setLayoutManager(layoutManager);
 
-        // fetchedBooksListView.setAdapter(adapter);
+        fetchedBooksListView.setAdapter(adapter);
     }
-
-
 }

@@ -7,7 +7,7 @@
     tools:context=".SearchBookActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fetched_books_list"
+        android:id="@+id/booksListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"/>
