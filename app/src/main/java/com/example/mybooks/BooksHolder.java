@@ -1,6 +1,8 @@
 package com.example.mybooks;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +49,10 @@ public class BooksHolder extends RecyclerView.ViewHolder implements View.OnClick
         // Sanity check
         if (this.book != null) {
             Toast.makeText(this.context, "Clicked on " + this.book.getTitle(), Toast.LENGTH_LONG).show();
+
+            Intent bookDetails = new Intent(itemView.getContext(), BookDetails.class);
+            bookDetails.putExtra("book", this.book);
+            itemView.getContext().startActivity(bookDetails);
         }
     }
 }

@@ -44,9 +44,6 @@ public class SearchBookActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
 
-        // For debugging
-        Log.i(log_tag, "Inside Search Book Activity fetched books list size: " + fetched_books.size());
-
         // Initialize books adapter
         BooksAdapter adapter = new BooksAdapter(this, R.layout.book_entry, fetched_books);
 

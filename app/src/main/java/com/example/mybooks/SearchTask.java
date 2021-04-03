@@ -66,48 +66,4 @@ public class SearchTask extends AsyncTask<String, Void, ArrayList<Book>> {
 
         return fetched_books;
     }
-
-
-    /*
-    /**
-     *
-     * @param JSONString
-
-    @Override
-    protected void onPostExecute (String JSONString)
-    {
-
-        try {
-            // Convert the raw response string to JSON object
-            JSONObject jsonObject = new JSONObject(JSONString);
-            // Get the JSON array of books
-            JSONArray jsonArray = (JSONArray) jsonObject.get("items");
-
-            Log.i(log_tag, "JSONArray " + jsonArray);
-
-            for (int i = 0; i < jsonArray.length(); i++)
-            {
-                JSONObject bookJSON = (JSONObject) jsonArray.get(i);
-                JSONObject volumeInfo = bookJSON.getJSONObject("volumeInfo");
-
-                try {
-                    // Create a new book
-                    Book book = new Book();
-                    // Set book title
-                    book.setTitle(volumeInfo.getString("title"));
-                    // Add fetched book to list
-                    fetched_books.add(book);
-                    // For debugging
-                    Log.i(log_tag, "Title: " + book.getTitle());
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    */
 }
