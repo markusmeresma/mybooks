@@ -19,7 +19,7 @@ public class BookDetails extends AppCompatActivity {
 
 
         Book book =
-                (Book) getIntent().getParcelableExtra("book");
+                (Book) getIntent().getSerializableExtra("book");
 
         Log.i(log_tag, "Book title " + book.getTitle());
 
@@ -28,10 +28,6 @@ public class BookDetails extends AppCompatActivity {
                     (TextView) findViewById(R.id.book_title_info);
 
             bookTitle.setText(book.getTitle());
-
-            Log.i(log_tag, "Book is not null: " + book.getTitle());
-        } else {
-            Log.i(log_tag, "Book is null");
         }
     }
 }
