@@ -2,4 +2,7 @@
     <string name="app_name">MyBooks</string>
     <string name="input_hint">Enter a book title or author</string>
     <string name="search_button">Search books</string>
+    <string name="search_menu_item">Find</string>
+    <string name="collections_menu_item">My Books</string>
+    <string name="more_menu_item">More</string>
 </resources>

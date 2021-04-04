@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.net.URL;
 
@@ -21,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText searchInput = (EditText) findViewById(R.id.searchInput);
         Button searchButton = (Button) findViewById(R.id.searchButton);
 
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent searchBookActivity = new Intent(MainActivity.this, SearchBookActivity.class);
                 searchBookActivity.putExtra("USER_QUERY", userQuery);
                 startActivity(searchBookActivity);
+            }
+        });
+
+        bottomNavigationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Clicked on menu", Toast.LENGTH_LONG).show();
             }
         });
 

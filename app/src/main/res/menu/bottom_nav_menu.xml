@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/magnify"
+        android:title="@string/search_menu_item"/>
+
+    <item
+        android:id="@+id/collections"
+        android:icon="@drawable/bookshelf"
+        android:title="@string/collections_menu_item"/>
+
+    <item
+        android:id="@+id/more"
+        android:icon="@drawable/account"
+        android:title="@string/more_menu_item"/>
+</menu>
