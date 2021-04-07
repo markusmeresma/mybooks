@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     final Fragment fragment1 = new SearchFragment();
     final Fragment fragment2 = new CollectionsFragment();
+    final Fragment fragment3 = new MoreFragment();
     final FragmentManager fm = getSupportFragmentManager();
     Fragment active = fragment1;
 
@@ -37,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        fm.beginTransaction().add(R.id.main, fragment3).hide(fragment3).commit();
         fm.beginTransaction().add(R.id.main, fragment2).hide(fragment2).commit();
         fm.beginTransaction().add(R.id.main, fragment1).commit();
+
+
 
 
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(searchBookActivity);
             }
         });
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -75,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
                             .show(fragment2)
                             .commit();
                     active = fragment2;
+                    return true;
+
+                case R.id.more:
+                    fm.beginTransaction()
+                            .hide(active)
+                            .show(fragment3)
+                            .commit();
+                    active = fragment3;
                     return true;
             }
             return false;
