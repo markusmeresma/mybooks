@@ -28,4 +28,21 @@ public class Collections {
     {
         read.add(book);
     }
+
+    public ArrayList<Book> getFavourites ()
+    {
+        return favourites;
+    }
+
+    public ArrayList<Book> getCurrentlyReading() {
+        return currentlyReading;
+    }
+
+    public ArrayList<Book> getWantToRead() {
+        return wantToRead;
+    }
+
+    public ArrayList<Book> getRead() {
+        return read;
+    }
 }

@@ -19,4 +19,5 @@
     <string name="add_to_want_to_read">Add to Want to Read</string>
     <string name="add_to_currently_reading">Add to Currently Reading</string>
     <string name="add_to_read">Add to Read</string>
+    <string name="Add_to_collections_Button">Add to Collection</string>
 </resources>
