@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final EditText searchInput = (EditText) findViewById(R.id.searchInput);
-        Button searchButton = (Button) findViewById(R.id.searchButton);
-
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -42,29 +39,13 @@ public class MainActivity extends AppCompatActivity {
         fm.beginTransaction().add(R.id.main, fragment2).hide(fragment2).commit();
         fm.beginTransaction().add(R.id.main, fragment1).commit();
 
-
-
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userQuery = searchInput.getText().toString();
-                // For debugging purposes
-                Log.i(getResources().getString(R.string.app_name), "userQuery " + userQuery);
-
-                // Start a new activity to fetch books
-                Intent searchBookActivity = new Intent(MainActivity.this, SearchBookActivity.class);
-                searchBookActivity.putExtra("USER_QUERY", userQuery);
-                startActivity(searchBookActivity);
-            }
-        });
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            // change fragments
             switch (item.getItemId()) {
                 case R.id.search:
                     fm.beginTransaction()

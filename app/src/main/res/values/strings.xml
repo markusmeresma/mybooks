@@ -1,10 +1,22 @@
 <resources>
     <string name="app_name">MyBooks</string>
-    <string name="input_hint1">Enter a book title or author (main activity)</string>
-    <string name="input_hint2">Enter a book title or author (fragment)</string>
-    <string name="search_button1">Find books (main activity)</string>
-    <string name="search_button2">Find books (fragment)</string>
+    <string name="input_hint">Enter a book title or author</string>
+    <string name="search_button">Find books</string>
     <string name="search_menu_item">Find</string>
     <string name="collections_menu_item">My Books</string>
     <string name="more_menu_item">More</string>
+    <string name="favourites_collection">Favourites</string>
+    <string name="wantToRead_collection">Want to read</string>
+    <string name="read_collection">Read</string>
+    <string name="currentlyReading_collection">Currently reading</string>
+    <string-array name="add_to_collection_options">
+        <item>Add to Favourites</item>
+        <item>Add to Want to Read</item>
+        <item>Add to Currently Reading</item>
+        <item>Add to Read</item>
+    </string-array>
+    <string name="add_to_favourites">Add to Favourites</string>
+    <string name="add_to_want_to_read">Add to Want to Read</string>
+    <string name="add_to_currently_reading">Add to Currently Reading</string>
+    <string name="add_to_read">Add to Read</string>
 </resources>
