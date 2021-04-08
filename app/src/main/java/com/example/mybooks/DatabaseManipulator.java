@@ -60,7 +60,7 @@ public class DatabaseManipulator {
         return  list;
     }
 
-    /*
+
     public List<String[]> selectFavourites ()
     {
         List<String[]> list = new ArrayList<String[]>();
@@ -69,8 +69,7 @@ public class DatabaseManipulator {
         if (cursor.moveToFirst()) {
             do {
                 String[] b1 = new String[]{cursor.getString(0),
-                        cursor.getString(1), cursor.getString(2),
-                        cursor.getString(3), cursor.getString(4)};
+                        cursor.getString(1), cursor.getString(2)};
                 list.add(b1);
                 x++;
             } while (cursor.moveToNext());
@@ -81,7 +80,66 @@ public class DatabaseManipulator {
         cursor.close();
         return list;
     }
-    */
+
+    public List<String[]> selectWantToRead ()
+    {
+        List<String[]> list = new ArrayList<String[]>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE collection='Want to Read'", null);
+        int x = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                String[] b1 = new String[]{cursor.getString(0),
+                        cursor.getString(1), cursor.getString(2)};
+                list.add(b1);
+                x++;
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public List<String[]> selectCurrentlyReading ()
+    {
+        List<String[]> list = new ArrayList<String[]>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE collection='Currently Reading'", null);
+        int x = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                String[] b1 = new String[]{cursor.getString(0),
+                        cursor.getString(1), cursor.getString(2)};
+                list.add(b1);
+                x++;
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public List<String[]> selectRead ()
+    {
+        List<String[]> list = new ArrayList<String[]>();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE collection='Read'", null);
+        int x = 0;
+        if (cursor.moveToFirst()) {
+            do {
+                String[] b1 = new String[]{cursor.getString(0),
+                        cursor.getString(1), cursor.getString(2)};
+                list.add(b1);
+                x++;
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+        cursor.close();
+        return list;
+    }
 
     private static class OpenHelper extends SQLiteOpenHelper {
         OpenHelper (Context context) {

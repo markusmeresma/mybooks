@@ -1,5 +1,6 @@
 package com.example.mybooks;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,15 +16,8 @@ import android.widget.Toast;
 
 public class CollectionsFragment extends Fragment {
 
-    private Collections collections;
-    private RecyclerView collectionsListView;
-
     public CollectionsFragment() {
         // Required empty public constructor
-    }
-
-    public CollectionsFragment (Collections c) {
-        this.collections = c;
     }
 
     @Override
@@ -41,28 +35,28 @@ public class CollectionsFragment extends Fragment {
         btnFavouritesCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                selectCollection(getString(R.string.Favourites));
             }
         });
 
         btnCurrentlyReadingCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                selectCollection(getString(R.string.Currently_Reading));
             }
         });
 
         btnWantToReadCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                selectCollection(getString(R.string.Want_to_Read));
             }
         });
 
         btnReadCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                selectCollection(getString(R.string.Read));
             }
         });
 
@@ -72,6 +66,8 @@ public class CollectionsFragment extends Fragment {
     public void selectCollection (String selectedCollection)
     {
         String collection = selectedCollection;
-
+        Intent intent = new Intent(getContext(), CheckCollectionActivity.class);
+        intent.putExtra("COLLECTION", collection);
+        startActivity(intent);
     }
 }
