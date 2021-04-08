@@ -41,8 +41,7 @@ public class CollectionsFragment extends Fragment {
         btnFavouritesCollection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Access favourites list from collections here and do stuff with recyclerview
-                Toast.makeText(getContext(), "Size of favourites: " + collections.getFavourites().size(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -68,5 +67,11 @@ public class CollectionsFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void selectCollection (String selectedCollection)
+    {
+        String collection = selectedCollection;
+
     }
 }

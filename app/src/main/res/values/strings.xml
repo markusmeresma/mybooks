@@ -20,4 +20,9 @@
     <string name="add_to_currently_reading">Add to Currently Reading</string>
     <string name="add_to_read">Add to Read</string>
     <string name="Add_to_collections_Button">Add to Collection</string>
+    <string name="Favourites">Favourites</string>
+    <string name="Want_to_Read">Want to Read</string>
+    <string name="Currently_Reading">Currently Reading</string>
+    <string name="Read">Read</string>
+    <string name="check_data_title">TITLE - AUTHOR</string>
 </resources>
