@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Book implements Serializable {
     private String id;
     private String title;
+    private String authors;
     private String subtitle;
     private String description;
 
@@ -20,6 +21,8 @@ public class Book implements Serializable {
     public String getTitle() {
         return this.title;
     }
+
+    public String getAuthors() {return this.authors; }
 
     public String getSubtitle() {
         return this.subtitle;
@@ -36,6 +39,8 @@ public class Book implements Serializable {
     public void setTitle(String t) {
         this.title = t;
     }
+
+    public void setAuthors(String a) { this.authors = a; }
 
     public void setSubtitle(String s) {
         this.subtitle = s;

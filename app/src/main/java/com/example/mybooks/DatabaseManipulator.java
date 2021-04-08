@@ -18,7 +18,7 @@ public class DatabaseManipulator {
     static SQLiteDatabase db;
     private SQLiteStatement insertStmt;
 
-    private static final String INSERT = "insert into " + TABLE_NAME + " (title, collection) values (?,?)";
+    private static final String INSERT = "insert into " + TABLE_NAME + " (title, authors, subtitle, description, collection) values (?,?,?,?,?)";
 
     public DatabaseManipulator (Context context) {
         DatabaseManipulator.context = context;
@@ -27,12 +27,13 @@ public class DatabaseManipulator {
         this.insertStmt = DatabaseManipulator.db.compileStatement(INSERT);
     }
 
-    public long insert (String title, String collection)
+    public long insert (String title, String authors, String subtitle, String description, String collection)
     {
         this.insertStmt.bindString(1, title);
-        // this.insertStmt.bindString(2, author);
-        // this.insertStmt.bindString(3, description);
-        this.insertStmt.bindString(2, collection);
+        this.insertStmt.bindString(2, authors);
+        this.insertStmt.bindString(3, subtitle);
+        this.insertStmt.bindString(4, description);
+        this.insertStmt.bindString(5, collection);
         return this.insertStmt.executeInsert();
     }
 
@@ -41,10 +42,11 @@ public class DatabaseManipulator {
         db.delete(TABLE_NAME, null, null);
     }
 
+    /*
     public List<String[]> selectAll ()
     {
         List<String[]> list = new ArrayList<String[]>();
-        Cursor cursor = db.query(TABLE_NAME, new String [] {"id", "title", "collection"}, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, new String [] {"id", "title", "authors"}, null, null, null, null, null);
         int x = 0;
         if (cursor.moveToFirst()) {
             do {
@@ -59,7 +61,7 @@ public class DatabaseManipulator {
         cursor.close();
         return  list;
     }
-
+    */
 
     public List<String[]> selectFavourites ()
     {
@@ -69,7 +71,8 @@ public class DatabaseManipulator {
         if (cursor.moveToFirst()) {
             do {
                 String[] b1 = new String[]{cursor.getString(0),
-                        cursor.getString(1), cursor.getString(2)};
+                        cursor.getString(1), cursor.getString(2),
+                cursor.getString(3), cursor.getString(4), cursor.getString(5)};
                 list.add(b1);
                 x++;
             } while (cursor.moveToNext());
@@ -89,7 +92,8 @@ public class DatabaseManipulator {
         if (cursor.moveToFirst()) {
             do {
                 String[] b1 = new String[]{cursor.getString(0),
-                        cursor.getString(1), cursor.getString(2)};
+                        cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4), cursor.getString(5)};
                 list.add(b1);
                 x++;
             } while (cursor.moveToNext());
@@ -109,7 +113,8 @@ public class DatabaseManipulator {
         if (cursor.moveToFirst()) {
             do {
                 String[] b1 = new String[]{cursor.getString(0),
-                        cursor.getString(1), cursor.getString(2)};
+                        cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4), cursor.getString(5)};
                 list.add(b1);
                 x++;
             } while (cursor.moveToNext());
@@ -129,7 +134,8 @@ public class DatabaseManipulator {
         if (cursor.moveToFirst()) {
             do {
                 String[] b1 = new String[]{cursor.getString(0),
-                        cursor.getString(1), cursor.getString(2)};
+                        cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3), cursor.getString(4), cursor.getString(5)};
                 list.add(b1);
                 x++;
             } while (cursor.moveToNext());
@@ -149,7 +155,7 @@ public class DatabaseManipulator {
         public void onCreate (SQLiteDatabase db)
         {
             db.execSQL("CREATE TABLE "
-                    + TABLE_NAME + " (id INTEGER PRIMARY KEY, title TEXT, collection TEXT)");
+                    + TABLE_NAME + " (id INTEGER PRIMARY KEY, title TEXT, authors TEXT, subtitle TEXT, description TEXT, collection TEXT)");
         }
 
         public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion)

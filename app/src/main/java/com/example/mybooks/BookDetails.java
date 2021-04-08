@@ -31,7 +31,19 @@ public class BookDetails extends AppCompatActivity {
             TextView bookTitle =
                     (TextView) findViewById(R.id.book_title_info);
 
+            TextView bookSubtitle =
+                    (TextView) findViewById(R.id.book_subtitle_info);
+
+            TextView bookAuthors =
+                    (TextView) findViewById(R.id.book_authors_info);
+
+            TextView bookDescription =
+                    (TextView) findViewById(R.id.book_description_info);
+
             bookTitle.setText(book.getTitle());
+            bookSubtitle.setText(book.getSubtitle());
+            bookAuthors.setText(book.getAuthors());
+            bookDescription.setText(book.getDescription());
         }
 
         Button btnAddToCollection = (Button) findViewById(R.id.btnAddToCollection);
@@ -77,9 +89,11 @@ public class BookDetails extends AppCompatActivity {
     public void saveToDatabase (Book book, String selectedCollection)
     {
         String title = book.getTitle();
-        // Add author and description
+        String authors = book.getAuthors();
+        String subtitle = book.getSubtitle();
+        String description = book.getDescription();
         String collection = selectedCollection;
         this.dm = new DatabaseManipulator(this);
-        this.dm.insert(title, collection);
+        this.dm.insert(title, authors, subtitle, description, collection);
     }
 }

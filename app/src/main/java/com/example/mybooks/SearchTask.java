@@ -48,8 +48,40 @@ public class SearchTask extends AsyncTask<String, Void, ArrayList<Book>> {
                 try {
                     // Create a new book
                     Book book = new Book();
-                    // Set book title
                     book.setTitle(volumeInfo.getString("title"));
+
+                    // If the book has a subtitle then attach it to the object
+                    if (volumeInfo.has("subtitle")) {
+                        book.setSubtitle(volumeInfo.getString("subtitle"));
+                    } else {
+                        book.setSubtitle("Not available");
+                    }
+
+                    // If the book has authors then attach them to the object
+                    String authors = "";
+                    if (volumeInfo.has("authors")) {
+                        // Get the authors array
+                        JSONArray authorsArray = volumeInfo.getJSONArray("authors");
+
+                        for (int j = 0; j < authorsArray.length(); j++) {
+                            if (j == 0) {
+                                authors += authorsArray.getString(j);
+                            } else {
+                                authors += " , " + authorsArray.getString(j);
+                            }
+                        }
+                        book.setAuthors(authors);
+                    } else {
+                        book.setAuthors("Not available");
+                    }
+
+                    // If the book has a description then attach it to the object
+                    if (volumeInfo.has("description")) {
+                        book.setDescription(volumeInfo.getString("description"));
+                    } else {
+                        book.setDescription("Not available");
+                    }
+
                     // Add fetched book to list
                     fetched_books.add(book);
                     // For debugging
