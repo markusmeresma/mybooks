@@ -3,6 +3,7 @@ package com.example.mybooks;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,19 +67,43 @@ public class BookDetails extends AppCompatActivity {
                 // Not a very elegant solution to use if..else but could't get the string comparison working with switch..case statements
                 if (selectedCollection.equals(getString(R.string.add_to_favourites)))
                 {
-                    saveToDatabase(book, getString(R.string.Favourites));
+                    try {
+                        saveToDatabase(book, getString(R.string.Favourites));
+                        Toast.makeText(getApplicationContext(), "Saved to favourites", Toast.LENGTH_SHORT).show();
+                    } catch (SQLiteException ex) {
+                        ex.printStackTrace();
+                        Toast.makeText(BookDetails.this, "Unable to add the book to the collection", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else if (selectedCollection.equals(getString(R.string.add_to_want_to_read)))
                 {
-                    saveToDatabase(book, getString(R.string.Want_to_Read));
+                    try {
+                        saveToDatabase(book, getString(R.string.Want_to_Read));
+                        Toast.makeText(getApplicationContext(), "Saved to Want to Read", Toast.LENGTH_SHORT).show();
+                    } catch (SQLiteException ex) {
+                        ex.printStackTrace();
+                        Toast.makeText(BookDetails.this, "Unable to add the book to the collection", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else if (selectedCollection.equals(getString(R.string.add_to_currently_reading)))
                 {
-                    saveToDatabase(book, getString(R.string.Currently_Reading));
+                    try {
+                        saveToDatabase(book, getString(R.string.Currently_Reading));
+                        Toast.makeText(getApplicationContext(), "Saved to Currently Reading", Toast.LENGTH_SHORT).show();
+                    } catch (SQLiteException ex) {
+                        ex.printStackTrace();
+                        Toast.makeText(BookDetails.this, "Unable to add the book to the collection", Toast.LENGTH_SHORT).show();
+                    }
 
                 } else if (selectedCollection.equals(getString(R.string.add_to_read)))
                 {
-                    saveToDatabase(book, getString(R.string.Read));
+                    try {
+                        saveToDatabase(book, getString(R.string.Read));
+                        Toast.makeText(getApplicationContext(), "Saved to Read", Toast.LENGTH_SHORT).show();
+                    } catch (SQLiteException ex) {
+                        ex.printStackTrace();
+                        Toast.makeText(BookDetails.this, "Unable to add the book to the collection", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
 
@@ -86,6 +111,11 @@ public class BookDetails extends AppCompatActivity {
         });
     }
 
+    /**
+     * Save book to the db
+     * @param book
+     * @param selectedCollection
+     */
     public void saveToDatabase (Book book, String selectedCollection)
     {
         String title = book.getTitle();

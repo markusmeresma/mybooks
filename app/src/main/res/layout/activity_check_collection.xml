@@ -12,6 +12,12 @@
         android:layout_height="wrap_content"
         android:text="@string/check_data_title"/>
 
+    <Button
+        android:id="@+id/btnEmptyList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_collection"/>
+
     <TextView
         android:id="@+id/check_selection"
         android:layout_width="fill_parent"

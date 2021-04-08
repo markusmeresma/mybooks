@@ -25,4 +25,5 @@
     <string name="Currently_Reading">Currently Reading</string>
     <string name="Read">Read</string>
     <string name="check_data_title">TITLE - AUTHOR</string>
+    <string name="empty_collection">Empty Collection</string>
 </resources>

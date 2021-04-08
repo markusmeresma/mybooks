@@ -18,7 +18,7 @@ public class SearchTask extends AsyncTask<String, Void, ArrayList<Book>> {
     private static final String log_tag = SearchTask.class.getSimpleName();
 
     /**
-     *
+     * Make the API query and retrieve information about books
      * @param urls
      * @return
      */
@@ -54,7 +54,7 @@ public class SearchTask extends AsyncTask<String, Void, ArrayList<Book>> {
                     if (volumeInfo.has("subtitle")) {
                         book.setSubtitle(volumeInfo.getString("subtitle"));
                     } else {
-                        book.setSubtitle("Not available");
+                        book.setSubtitle("Subtitle not available");
                     }
 
                     // If the book has authors then attach them to the object
@@ -72,20 +72,18 @@ public class SearchTask extends AsyncTask<String, Void, ArrayList<Book>> {
                         }
                         book.setAuthors(authors);
                     } else {
-                        book.setAuthors("Not available");
+                        book.setAuthors("Authors not available");
                     }
 
                     // If the book has a description then attach it to the object
                     if (volumeInfo.has("description")) {
                         book.setDescription(volumeInfo.getString("description"));
                     } else {
-                        book.setDescription("Not available");
+                        book.setDescription("Description not available");
                     }
 
                     // Add fetched book to list
                     fetched_books.add(book);
-                    // For debugging
-                    Log.i(log_tag, "Title: " + book.getTitle());
 
                 } catch (Exception ex) {
                     ex.printStackTrace();

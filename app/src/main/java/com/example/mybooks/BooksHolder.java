@@ -48,7 +48,6 @@ public class BooksHolder extends RecyclerView.ViewHolder implements View.OnClick
     public void onClick(View v) {
         // Sanity check
         if (this.book != null) {
-            Toast.makeText(this.context, "Clicked on " + this.book.getTitle(), Toast.LENGTH_LONG).show();
 
             Intent bookDetails = new Intent(itemView.getContext(), BookDetails.class);
             bookDetails.putExtra("book", this.book);

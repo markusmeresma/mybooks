@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SearchFragment extends Fragment {
 
@@ -32,10 +33,17 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 String userQuery = searchInput.getText().toString();
 
-                //Start new activity to find books
-                Intent searchBookActivity = new Intent(getContext(), SearchBookActivity.class);
-                searchBookActivity.putExtra("USER_QUERY", userQuery);
-                startActivity(searchBookActivity);
+                if (userQuery.trim().length() == 0) {
+                    Toast.makeText(getContext(), "Search field cannot be empty", Toast.LENGTH_LONG).show();
+                } else {
+                    //Start a new activity to find books
+                    Intent searchBookActivity = new Intent(getContext(), SearchBookActivity.class);
+                    searchBookActivity.putExtra("USER_QUERY", userQuery);
+                    startActivity(searchBookActivity);
+                }
+
+                // Clear user input field
+                searchInput.getText().clear();
             }
         });
 

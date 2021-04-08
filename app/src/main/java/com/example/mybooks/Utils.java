@@ -22,8 +22,7 @@ public class Utils {
     public Utils () {}
 
     /**
-     * Return string later
-     * Make private later
+     * Make google books API query
      * @param
      * @retun String
      */

@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,10 +25,36 @@ public class CheckCollectionActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_collection);
 
+        Button btnEmptyCollection = (Button) findViewById(R.id.btnEmptyList);
         Bundle extras = getIntent().getExtras();
         dm = new DatabaseManipulator(this);
 
-        // Again not the most elegant solution but couldn't get string comparison with switch..case working
+        stg1 = getCollection(extras);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stg1);
+        this.setListAdapter(adapter);
+        selection = (TextView) findViewById(R.id.check_selection);
+
+        btnEmptyCollection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dm.deleteCollection(extras.getString("COLLECTION"));
+                Toast.makeText(getApplicationContext(), "Deleted collection", Toast.LENGTH_SHORT).show();
+
+                stg1 = getCollection(extras);
+                adapter.notifyDataSetChanged();
+                selection = (TextView) findViewById(R.id.check_selection);
+            }
+        });
+    }
+
+    /**
+     * Get collection from the db
+     * @param extras
+     * @return String[]
+     */
+    public String[] getCollection (Bundle extras)
+    {
         if (extras.getString("COLLECTION").equals(getString(R.string.Favourites)))
         {
             books = dm.selectFavourites();
@@ -54,8 +84,6 @@ public class CheckCollectionActivity extends ListActivity {
             x++;
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stg1);
-        this.setListAdapter(adapter);
-        selection = (TextView) findViewById(R.id.check_selection);
+        return stg1;
     }
 }

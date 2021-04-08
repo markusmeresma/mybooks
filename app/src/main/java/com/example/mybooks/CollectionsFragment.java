@@ -63,6 +63,10 @@ public class CollectionsFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Select a collection
+     * @param selectedCollection
+     */
     public void selectCollection (String selectedCollection)
     {
         String collection = selectedCollection;

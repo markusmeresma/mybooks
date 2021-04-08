@@ -27,6 +27,15 @@ public class DatabaseManipulator {
         this.insertStmt = DatabaseManipulator.db.compileStatement(INSERT);
     }
 
+    /**
+     *
+     * @param title
+     * @param authors
+     * @param subtitle
+     * @param description
+     * @param collection
+     * @return
+     */
     public long insert (String title, String authors, String subtitle, String description, String collection)
     {
         this.insertStmt.bindString(1, title);
@@ -40,6 +49,15 @@ public class DatabaseManipulator {
     public void deleteAll ()
     {
         db.delete(TABLE_NAME, null, null);
+    }
+
+    /**
+     * Delete a collection
+     * @param currentCollection
+     */
+    public void deleteCollection (String currentCollection)
+    {
+        db.delete(TABLE_NAME, "collection=?", new String[]{currentCollection});
     }
 
     /*

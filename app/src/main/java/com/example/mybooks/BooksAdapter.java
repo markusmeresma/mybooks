@@ -53,6 +53,10 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksHolder> {
         holder.bindBook(b);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getItemCount ()
     {
         return this.books.size();
